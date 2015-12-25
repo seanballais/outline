@@ -20,7 +20,5 @@ def help():
     print("  -s <directory> --scripts=<directory>  Specify the directory where to look for\n")
     print("                                        third-party outline scripts.\n")
 
-    return None
-
 if __name__ == "__main__":
     help()

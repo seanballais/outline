@@ -9,10 +9,7 @@ def main(argv):
     config_file = ""
     project_name = ""
 
-    try:
-        opts, args = getopt.getopt(argv, "hvc:s:", ["help", "version",
-                                                    "config=", "scripts"])
-    except getopt.GetoptError:
+    
 
 
 if __name__ == "__main__":
