@@ -12,6 +12,8 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hvc:s:", ["help", "version",
                                                     "config=", "scripts"])
+    except getopt.GetoptError:
+
 
 if __name__ == "__main__":
-    self.main(sys.arg[1:])
+    main(sys.argv[1:])
