@@ -7,21 +7,46 @@ import util
 
 def main(argv):
     # Handle the command line arguments
-    scripts_location = "~/.outline/scripts/"
-    config_file = ""
-    project_name = ""
-    verbose = False
+    # We're all set. Time to configure them settings
+    args = {
+        "project_name": "",
+        "scripts": "~/.outline/scripts/",
+        "config_file": "",
+        "verbose": False,
+    }
     if "-h" or "--help" in argv or not argv:
         info.help() # I need somebody
     else if argv[0] == "-V" or argv[0] == "--version":
         info.info()
     else:
         # Check for mistakes in the arguments first
-        if util.elem_occurences_in_list(argv, "-c") > 1 or
-           util.elem_fragment_occurences_in_list(argv, "--config=" > 1 or
-           util.elem_occurences_in_list(argv, "-s") > 1 or
-           util.elem_fragment_occurences_in_list(argv, "--scripts=") > 1:
-           info.help() # Not just anybody
+        if not util.arguments_valid(argv):
+            sys.exit(2)
+
+        if argv.count("-c") > 1 or
+           util.fragment_count_list(argv, "--config=") > 1 or
+           argv.count("-s") > 1 or
+           util.fragment_count_in_list(argv, "--scripts=") > 1 or
+           argv.count("-v") > 1 or
+           argv.count("--verbose") or
+           util.project_name_count_in_list(argv) > 1:
+            info.help() # Not just anybody
+
+        if not locate_project_name(argv):
+            info.help() # You know I need somebody, help
+
+        if not locate_config_file(argv):
+            info.help() # !
+
+        if not locate_scripts_folder(argv):
+            info.help() # When I was younger, so much younger than today
+
+        # Finished validating the passed arguments
+        args["project_name"] = locate_project_name(argv)
+        args["scripts"] = locate_scripts_folder(argv)
+        args["config_file"] = locate_config_file(argv)
+        args["verbose"] = check_verbose(argv)
+
     sys.exit(0)
 
 if __name__ == "__main__":

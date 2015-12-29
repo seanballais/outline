@@ -24,7 +24,9 @@ def help():
     print("  -s <directory> --scripts=<directory>  Specify the directory where to look for\n")
     print("                                        third-party outline scripts.\n")
 
-def arg_error():
+def arg_error(arg):
+    print("outline: unknown argument: {0}\n".format(arg))
+    print("Try 'outline --help' for more information.\n")
 
 if __name__ == "__main__":
     info()
