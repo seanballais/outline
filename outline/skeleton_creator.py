@@ -33,6 +33,4 @@ def create_folders(config_file):
     line = dir_list.readline()
     while line:
         line = line.strip()
-        if line[0] == "#": # The line is a comment
-            continue
-        else: # Oh! Oh! This one's probably a directory now.
+        # TODO: Do regex to delete the comment in the line and continue stuff.
