@@ -28,5 +28,9 @@ def arg_error(arg):
     print("outline: unknown argument: {0}\n".format(arg))
     print("Try 'outline --help' for more information.\n")
 
+def display_config_error(config_file):
+    print("Cannot find config file: {0}\n".format(config_file))
+    print("Make sure you entered the right config file name.\n")
+
 if __name__ == "__main__":
     info()

@@ -10,7 +10,7 @@ def main(argv):
     # We're all set. Time to configure them settings
     args = {
         "project_name": "",
-        "scripts": "~/.outline/scripts/",
+        "scripts": "",
         "config_file": "",
         "verbose": False,
     }
@@ -34,12 +34,15 @@ def main(argv):
 
         if not locate_project_name(argv):
             info.help() # You know I need somebody, help
+            sys.exit(2)
 
         if not locate_config_file(argv):
             info.help() # !
+            sys.exit(2)
 
         if not locate_scripts_folder(argv):
             info.help() # When I was younger, so much younger than today
+            sys.exit(2)
 
         # Finished validating the passed arguments
         args["project_name"] = locate_project_name(argv)
