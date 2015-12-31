@@ -18,14 +18,14 @@ def main(argv):
     }
     if "-h" or "--help" in argv or not argv:
         info.help() # I need somebody
-    else if argv[0] == "-V" or argv[0] == "--version":
+    elif argv[0] == "-V" or argv[0] == "--version":
         info.info()
     else:
         # Check for mistakes in the arguments first
         if not util.arguments_valid(argv):
             sys.exit(2)
 
-        if argv.count("-c") > 1 or
+        if argv.count("-c") > 1 or \
            util.fragment_count_list(argv, "--config=") > 1 or
            argv.count("-s") > 1 or
            util.fragment_count_in_list(argv, "--scripts=") > 1 or
