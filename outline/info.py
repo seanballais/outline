@@ -10,7 +10,7 @@ def help():
     info()
     print("")
     print("Usage:")
-    print("  outline <project_name> [-c <file> | --config=<file>] [-s <directory> | --scripts=<directory>] [-v | --verbose]")
+    print("  outline <project_name> [-c <file> | --config=<file>] [-v | --verbose]")
     print("  outline -h | --help")
     print("  outline -V | --version")
     print("")
@@ -21,8 +21,6 @@ def help():
     print("  -c <file>, --config=<file>            Specify the config file to be used.")
     print("                                        Otherwise, outline will choose the")
     print("                                        config file that will be used.")
-    print("  -s <directory> --scripts=<directory>  Specify the directory where to look for")
-    print("                                        third-party outline scripts.")
 
 def arg_error(arg):
     print("outline: unknown argument: {0}".format(arg))

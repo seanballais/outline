@@ -24,6 +24,19 @@ def locate_project_name(elemList):
 
     return False
 
+def locate_config_file(elemList):
+    for listElem in elemList:
+        if "-c" == listElem:
+            index = elemList.index(listElem) + 1
+            if not "-" in elemList[index] or not "--" in elemList[index]:
+                return elemList[index]
+        elif "--config" in listElem:
+            optLen = len(longOpt)
+            if len(listElem) > optLen:
+                return listElem[optLen:]
+
+    return False
+
 def check_verbose(elemList):
     for listElem in elemList:
         if listElem == "-v" or listElem == "--verbose":
@@ -43,12 +56,10 @@ def is_argument(arg):
     if (arg == "-h" or
         arg == "-v" or
         arg == "-V" or
-        arg == "-s" or
         arg == "-c" or
         arg == "--help" or
         arg == "--verbose" or
         arg == "--version" or
-        "--scripts=" in arg or
         "--config=" in arg):
         return True
 

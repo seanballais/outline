@@ -12,7 +12,6 @@ def main(argv):
     # We're all set. Time to configure them settings
     args = {
         "project_name": "",
-        "scripts": "",
         "config_file": "",
         "verbose": False,
     }
@@ -39,19 +38,10 @@ def main(argv):
             info.help() # You know I need somebody, help
             sys.exit(2)
 
-        if not util.locate_config_file(argv):
-            info.help() # !
-            sys.exit(2)
-
-        if not util.locate_scripts_folder(argv):
-            info.help() # When I was younger, so much younger than today
-            sys.exit(2)
-
         # Finished validating the passed arguments
         args["project_name"] = util.locate_project_name(argv)
-        args["scripts"] = util.locate_scripts_folder(argv)
         args["config_file"] = util.locate_config_file(argv)
-        args["verbose"] = check_verbose(argv)
+        args["verbose"] = util.check_verbose(argv)
 
         # Time to create the directories
         if not skeleton_creator.create_skeleton(args):
