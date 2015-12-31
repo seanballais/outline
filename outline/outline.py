@@ -5,6 +5,7 @@ import sys
 import info
 import util
 import skeleton_creator
+import run_plugins
 
 def main(argv):
     # Handle the command line arguments
@@ -55,6 +56,7 @@ def main(argv):
         skeleton_creator.create_skeleton(args)
 
         # Now, run the plugin (a.k.a plugins)
+        
 
     sys.exit(0)
 
