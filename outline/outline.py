@@ -52,7 +52,9 @@ def main(argv):
         args["verbose"] = check_verbose(argv)
 
         # Time to create the directories
-        skeleton_creator(args)
+        skeleton_creator.create_skeleton(args)
+
+        # Now, run the plugin (a.k.a plugins)
 
     sys.exit(0)
 

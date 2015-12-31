@@ -9,8 +9,8 @@ def create_skeleton(args):
     # Search for the configuration file
     locations = {
         os.path.expanduser("~") + "/.outline/config/",
-        "/usr/local/share/outline/",
-        "/usr/share/outline/",
+        "/usr/local/share/outline/config",
+        "/usr/share/outline/config",
     }
 
     verbose = args["verbose"]
@@ -57,7 +57,7 @@ def create_folders(config_file, verbose):
     line = dir_list.readline()
     while line:
         line = line.strip()
-        if (line[0] == "#"):
+        if line[0] == "#":
             continue
 
         re.sub("#.*", "", line)
@@ -82,5 +82,7 @@ def create_folders(config_file, verbose):
             except OSError:
                 print("Cannot create directory: '{0}'. Make sure that you are permitted to create directories in this directory.\n".format(line))
                 return False
+
+        line = dir_list.readline()
 
     return True
