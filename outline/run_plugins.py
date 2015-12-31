@@ -13,10 +13,10 @@ def run_plugins(verbose):
 
     for loc in locations:
         try:
-            script_order = open(loc + "script.oto", "r")
+            script_order = open(loc + "scripts.oto", "r")
         except FileNotFoundError:
             if verbose:
-                print("script.oto not located in directory ('{0}'). Moving on...".format(loc))
+                print("scripts.oto not located in directory ('{0}'). Moving on...".format(loc))
             continue
 
         line = script_order.readline()
