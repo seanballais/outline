@@ -33,6 +33,7 @@ def main(argv):
             util.fragment_count_in_list(argv, "--scripts=") > 1 or
             util.project_name_count_in_list(argv) > 1):
             info.help() # Not just anybody
+            sys.exit(2)
 
         if not util.locate_project_name(argv):
             info.help() # You know I need somebody, help
