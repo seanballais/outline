@@ -4,6 +4,7 @@ import sys
 
 import info
 import util
+import skeleton_creator
 
 def main(argv):
     # Handle the command line arguments
@@ -49,6 +50,8 @@ def main(argv):
         args["scripts"] = locate_scripts_folder(argv)
         args["config_file"] = locate_config_file(argv)
         args["verbose"] = check_verbose(argv)
+
+        # Time to create the directories
 
     sys.exit(0)
 
