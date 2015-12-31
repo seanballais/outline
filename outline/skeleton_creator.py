@@ -21,7 +21,7 @@ def create_skeleton(args):
     else:
         if os.path.exists(os.getcwd() + "/" + args["project_name"]):
             print("Directory ('{0}') already exists.\n".format(args["project_name"]))
-            return
+            return False
         else:
             # Create the project folder
             try:
@@ -31,17 +31,21 @@ def create_skeleton(args):
                 os.makedirs(args["project_name"])
             except OSError:
                 print("Cannot create folder: '{0}'. Make sure that you are permitted to create files in this directory.\n".format(args["project_name"]))
-                return
+                return False
 
             # Create files and folders inside the project folder
             try:
                 os.chdir(args["project_name"])
             except FileNotFoundError:
                 print("Cannot enter directory: '{0}'.\n".format(args["project_name"]))
-                return
+                return False
 
             if create_folders(config_file, verbose):
                 print("Successfully created project ('{0}').\n".format(args["project_name"]))
+            else:
+                return False
+
+    return True
 
 def locate_config_file(config_file, locations):
     for loc in locations:

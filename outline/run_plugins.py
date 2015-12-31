@@ -36,7 +36,7 @@ def run_plugins(verbose):
             if os.path.exists(plugin):
                 if verbose:
                     print("Running plugin: {0}...\n".format(line))
-                
+
                 loader = importlib.machinery.SourceFileLoader("outline_plugin", plugin)
                 module = loader.load_module()
                 module.main()
@@ -47,3 +47,5 @@ def run_plugins(verbose):
                 continue
 
             line = script_order.readline()
+
+    return True
