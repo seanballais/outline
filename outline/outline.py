@@ -52,6 +52,7 @@ def main(argv):
         args["verbose"] = check_verbose(argv)
 
         # Time to create the directories
+        skeleton_creator(args)
 
     sys.exit(0)
 

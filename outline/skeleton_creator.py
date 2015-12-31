@@ -5,7 +5,7 @@ import re
 
 import info
 
-def create_skeleton(args, configName):
+def create_skeleton(args):
     # Search for the configuration file
     locations = {
         os.path.expanduser("~") + "/.outline/config/",
@@ -15,7 +15,7 @@ def create_skeleton(args, configName):
 
     verbose = args["verbose"]
 
-    config_file = locate_config_file(locations)
+    config_file = locate_config_file(args["config_file"], locations)
     if not config:
         info.display_config_error(args["config_file"])
     else:
