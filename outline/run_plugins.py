@@ -19,6 +19,7 @@ def run_plugins():
 
         line = script_order.readline()
         while line:
+            # Remove any comments from the line
             line = line.strip()
             if line[0] == "#":
                 continue
@@ -26,4 +27,4 @@ def run_plugins():
             re.sub("#.*", "", line)
             line = line.rstrip()
 
-            
+            # Check if the plugin exists
