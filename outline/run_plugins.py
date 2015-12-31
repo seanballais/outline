@@ -13,12 +13,10 @@ def run_plugins(verbose):
 
     for loc in locations:
         try:
-            script_order = open(loc + "script.oto", "r")
+            script_order = open(loc + "scripts.oto", "r")
         except FileNotFoundError:
-            script_order.close()
-
             if verbose:
-                print("scirpt.oto not located in directory ('{0}'). Moving on...\n".format(loc))
+                print("scripts.oto not located in directory ('{0}'). Moving on...".format(loc))
             continue
 
         line = script_order.readline()
@@ -35,17 +33,19 @@ def run_plugins(verbose):
             plugin = loc + line
             if os.path.exists(plugin):
                 if verbose:
-                    print("Running plugin: {0}...\n".format(line))
+                    print("Running plugin: {0}...".format(line))
 
                 loader = importlib.machinery.SourceFileLoader("outline_plugin", plugin)
                 module = loader.load_module()
                 module.main()
             else:
                 if verbose:
-                    print("Plugin ('{0}') doesn't exist.\n".format(line))
+                    print("Plugin ('{0}') doesn't exist.".format(line))
 
                 continue
 
             line = script_order.readline()
+
+        script_order.close()
 
     return True
