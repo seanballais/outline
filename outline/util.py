@@ -15,22 +15,14 @@ def fragment_count_in_list(elemList, elem):
 def project_name_count_in_list(elemList):
     count = 0
     for listElem in elemList:
-        if listElem != "-h" or listElem != "--help" or \
-           listElem != "-v" or listElem != "--verbose" or \
-           listElem != "-V" or listElem != "--version" or \
-           listElem != "-s" or "--scripts=" not in listElem or \
-           listElem != "-c" or "--config=" not in listElem:
+        if not is_argument(listElem):
             count += 1
 
     return count
 
 def locate_project_name(elemList):
     for listElem in elemList:
-        if listElem != "-h" or listElem != "--help" or \
-           listElem != "-v" or listElem != "--verbose" or \
-           listElem != "-V" or listElem != "--version" or \
-           listElem != "-s" or "--scripts=" not in listElem or \
-           listElem != "-c" or "--config=" not in listElem:
+        if not is_argument(listElem):
             return listElem
 
     return False
@@ -63,13 +55,23 @@ def check_verbose(elemList):
 
 def arguments_valid(elemList):
     for listElem in elemList:
-        if "-" in listElem or "--" in listElem:
-            if listElem != "-h" or listElem != "--help" or \
-               listElem != "-v" or listElem != "--verbose" or \
-               listElem != "-V" or listElem != "--version" or \
-               listElem != "-s" or "--scripts=" not in listElem or \
-               listElem != "-c" or "--config=" not in listElem:
-                info.arg_error(listElem)
-                return False
+        if not is_argument(listElem):
+            info.arg_error(listElem)
+            return False
 
     return True
+
+def is_argument(arg):
+    if (arg == "-h" or
+        arg == "-v" or
+        arg == "-V" or
+        arg == "-s" or
+        arg == "-c" or
+        arg == "--help" or
+        arg == "--verbose" or
+        arg == "--version" or
+        "--scripts=" in arg or
+        "--config=" in arg):
+        return True
+
+    return False
