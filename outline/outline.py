@@ -16,7 +16,7 @@ def main(argv):
         "config_file": "",
         "verbose": False,
     }
-    if "-h" or "--help" in argv or not argv:
+    if "-h" in argv or "--help" in argv or not argv:
         info.help() # I need somebody
     elif argv[0] == "-V" or argv[0] == "--version":
         info.info()
