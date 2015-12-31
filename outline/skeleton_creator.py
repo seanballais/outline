@@ -52,12 +52,19 @@ def locate_config_file(config_file, locations):
         if os.path.exists(loc):
             for currFile in os.listdir(loc):
                 if currFile == config_file + ".otc":
-                    return os.path.abspath(currFile)
+                    return loc + currFile
 
     return False
 
 def create_folders(config_file, verbose):
-    dir_list = open(config_file, "r")
+    try:
+        dir_list = open(config_file, "r")
+    except FileNotFoundError:
+        if verbose:
+            print("Configuration file ('{0}') does not exist.".format(config_list))
+
+        return False
+
     line = dir_list.readline()
     while line:
         # Remove any comments from the line
@@ -90,5 +97,7 @@ def create_folders(config_file, verbose):
                 return False
 
         line = dir_list.readline()
+
+    dir_list.close()
 
     return True
