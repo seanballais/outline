@@ -12,39 +12,17 @@ def fragment_count_in_list(elemList, elem):
 
     return count
 
-def project_name_count_in_list(elemList):
-    count = 0
-    for listElem in elemList:
-        if not is_argument(listElem):
-            count += 1
+def project_name_specified(elemList):
+    if not is_argument(elemList[0]):
+        return True
 
-    return count
+    return False
 
 def locate_project_name(elemList):
-    for listElem in elemList:
-        if not is_argument(listElem):
-            return listElem
+    if not is_argument(elemList[0]):
+        return elemList[0]
 
     return False
-
-def get_passed_arg_value(elemList, shortArg, longOpt):
-    for listElem in elemList:
-        if shortArg == listElem:
-            index = elemList.index(listElem) + 1
-            if not "-" in elemList[index] or not "--" in elemList[index]:
-                return elemList[index]
-        elif longOpt in listElem:
-            optLen = len(longOpt)
-            if len(listElem) > optLen:
-                return listElem[optLen:]
-
-    return False
-
-def locate_scripts_folder(elemList):
-    return get_passed_arg_value(elemList, "-s", "--scripts")
-
-def locate_config_file(elemList):
-    return get_passed_arg_value(elemList, "-c", "--config")
 
 def check_verbose(elemList):
     for listElem in elemList:

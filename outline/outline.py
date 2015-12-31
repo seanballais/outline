@@ -31,7 +31,7 @@ def main(argv):
             argv.count("--verbose") or
             util.fragment_count_in_list(argv, "--config=") > 1 or
             util.fragment_count_in_list(argv, "--scripts=") > 1 or
-            util.project_name_count_in_list(argv) > 1):
+            not util.project_name_specified(argv)):
             info.help() # Not just anybody
             sys.exit(2)
 
