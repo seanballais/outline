@@ -18,7 +18,7 @@ def run_plugins(verbose):
             script_order.close()
 
             if verbose:
-                print("scirpt.oto not located in directory ('{0}'). Moving on...\n".format(loc))
+                print("scirpt.oto not located in directory ('{0}'). Moving on...".format(loc))
             continue
 
         line = script_order.readline()
@@ -35,14 +35,14 @@ def run_plugins(verbose):
             plugin = loc + line
             if os.path.exists(plugin):
                 if verbose:
-                    print("Running plugin: {0}...\n".format(line))
+                    print("Running plugin: {0}...".format(line))
 
                 loader = importlib.machinery.SourceFileLoader("outline_plugin", plugin)
                 module = loader.load_module()
                 module.main()
             else:
                 if verbose:
-                    print("Plugin ('{0}') doesn't exist.\n".format(line))
+                    print("Plugin ('{0}') doesn't exist.".format(line))
 
                 continue
 
