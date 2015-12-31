@@ -15,8 +15,6 @@ def run_plugins(verbose):
         try:
             script_order = open(loc + "script.oto", "r")
         except FileNotFoundError:
-            script_order.close()
-
             if verbose:
                 print("scirpt.oto not located in directory ('{0}'). Moving on...".format(loc))
             continue
@@ -47,5 +45,7 @@ def run_plugins(verbose):
                 continue
 
             line = script_order.readline()
+
+        script_order.close()
 
     return True

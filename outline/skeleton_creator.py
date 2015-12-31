@@ -39,7 +39,7 @@ def create_skeleton(args):
                 print("Cannot enter directory: '{0}'.".format(args["project_name"]))
                 return False
 
-            if create_folders(config_file, verbose):
+            if create_folders(args["project_name"], config_file, verbose):
                 print("Successfully created project ('{0}').".format(args["project_name"]))
             else:
                 return False
@@ -55,7 +55,7 @@ def locate_config_file(config_file, locations):
 
     return False
 
-def create_folders(config_file, verbose):
+def create_folders(project_name, config_file, verbose):
     try:
         dir_list = open(config_file, "r")
     except FileNotFoundError:
@@ -88,21 +88,21 @@ def create_folders(config_file, verbose):
         if line[len(line) - 1] != "/": # This one's a file
             try:
                 if verbose:
-                    print("Creating file: '{0}/{1}'...".format(args["project_name"], line))
+                    print("Creating file: '{0}/{1}'...".format(project_name, line))
 
                 project_file = open(line, "w+")
                 project_file.close()
             except IOError:
-                print("Cannot create file: '{0}/{1}'. Make sure that you are permitted to create files in this directory.".format(args["project_name"], line))
+                print("Cannot create file: '{0}/{1}'. Make sure that you are permitted to create files in this directory.".format(project_name, line))
                 return False
         else: # This one's a directory
             try:
                 if verbose:
-                    print("Creating folder: '{0}/{1}'...".format(args["project_name"], line))
+                    print("Creating folder: '{0}/{1}'...".format(project_name, line))
 
                 os.makedirs(line)
             except OSError:
-                print("Cannot create directory: '{0}/{1}'. Make sure that you are permitted to create directories in this directory.".format(args["project_name"], line))
+                print("Cannot create directory: '{0}/{1}'. Make sure that you are permitted to create directories in this directory.".format(project_name, line))
                 return False
 
         line = dir_list.readline()
