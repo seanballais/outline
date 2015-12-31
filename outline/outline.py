@@ -12,45 +12,36 @@ def main(argv):
     # We're all set. Time to configure them settings
     args = {
         "project_name": "",
-        "scripts": "",
         "config_file": "",
         "verbose": False,
     }
-    if "-h" or "--help" in argv or not argv:
+    if "-h" in argv or "--help" in argv or not argv:
         info.help() # I need somebody
-    else if argv[0] == "-V" or argv[0] == "--version":
+    elif argv[0] == "-V" or argv[0] == "--version":
         info.info()
     else:
         # Check for mistakes in the arguments first
         if not util.arguments_valid(argv):
             sys.exit(2)
 
-        if argv.count("-c") > 1 or
-           util.fragment_count_list(argv, "--config=") > 1 or
-           argv.count("-s") > 1 or
-           util.fragment_count_in_list(argv, "--scripts=") > 1 or
-           argv.count("-v") > 1 or
-           argv.count("--verbose") or
-           util.project_name_count_in_list(argv) > 1:
+        if (argv.count("-c") > 1 or
+            argv.count("-s") > 1 or
+            argv.count("-v") > 1 or
+            argv.count("--verbose") or
+            util.fragment_count_in_list(argv, "--config=") > 1 or
+            util.fragment_count_in_list(argv, "--scripts=") > 1 or
+            not util.project_name_specified(argv)):
             info.help() # Not just anybody
+            sys.exit(2)
 
-        if not locate_project_name(argv):
+        if not util.locate_project_name(argv):
             info.help() # You know I need somebody, help
             sys.exit(2)
 
-        if not locate_config_file(argv):
-            info.help() # !
-            sys.exit(2)
-
-        if not locate_scripts_folder(argv):
-            info.help() # When I was younger, so much younger than today
-            sys.exit(2)
-
         # Finished validating the passed arguments
-        args["project_name"] = locate_project_name(argv)
-        args["scripts"] = locate_scripts_folder(argv)
-        args["config_file"] = locate_config_file(argv)
-        args["verbose"] = check_verbose(argv)
+        args["project_name"] = util.locate_project_name(argv)
+        args["config_file"] = util.locate_config_file_in_args(argv)
+        args["verbose"] = util.check_verbose(argv)
 
         # Time to create the directories
         if not skeleton_creator.create_skeleton(args):
