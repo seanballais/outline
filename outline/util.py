@@ -15,10 +15,10 @@ def fragment_count_in_list(elemList, elem):
 def project_name_count_in_list(elemList):
     count = 0
     for listElem in elemList:
-        if listElem != "-h" or listElem != "--help" or
-           listElem != "-v" or listElem != "--verbose" or
-           listElem != "-V" or listElem != "--version" or
-           listElem != "-s" or "--scripts=" not in listElem or
+        if listElem != "-h" or listElem != "--help" or \
+           listElem != "-v" or listElem != "--verbose" or \
+           listElem != "-V" or listElem != "--version" or \
+           listElem != "-s" or "--scripts=" not in listElem or \
            listElem != "-c" or "--config=" not in listElem:
             count += 1
 
@@ -26,10 +26,10 @@ def project_name_count_in_list(elemList):
 
 def locate_project_name(elemList):
     for listElem in elemList:
-        if listElem != "-h" or listElem != "--help" or
-           listElem != "-v" or listElem != "--verbose" or
-           listElem != "-V" or listElem != "--version" or
-           listElem != "-s" or "--scripts=" not in listElem or
+        if listElem != "-h" or listElem != "--help" or \
+           listElem != "-v" or listElem != "--verbose" or \
+           listElem != "-V" or listElem != "--version" or \
+           listElem != "-s" or "--scripts=" not in listElem or \
            listElem != "-c" or "--config=" not in listElem:
             return listElem
 
@@ -64,10 +64,10 @@ def check_verbose(elemList):
 def arguments_valid(elemList):
     for listElem in elemList:
         if "-" in listElem or "--" in listElem:
-            if listElem != "-h" or listElem != "--help" or
-               listElem != "-v" or listElem != "--verbose" or
-               listElem != "-V" or listElem != "--version" or
-               listElem != "-s" or "--scripts=" not in listElem or
+            if listElem != "-h" or listElem != "--help" or \
+               listElem != "-v" or listElem != "--verbose" or \
+               listElem != "-V" or listElem != "--version" or \
+               listElem != "-s" or "--scripts=" not in listElem or \
                listElem != "-c" or "--config=" not in listElem:
                 info.arg_error(listElem)
                 return False
