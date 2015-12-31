@@ -1,17 +1,65 @@
 #!/usr/bin/python3
 
 import sys
-import getopt
+
+import info
+import util
+import skeleton_creator
+import run_plugins
 
 def main(argv):
     # Handle the command line arguments
-    scripts_location = ""
-    config_file = ""
-    project_name = ""
+    # We're all set. Time to configure them settings
+    args = {
+        "project_name": "",
+        "scripts": "",
+        "config_file": "",
+        "verbose": False,
+    }
+    if "-h" or "--help" in argv or not argv:
+        info.help() # I need somebody
+    else if argv[0] == "-V" or argv[0] == "--version":
+        info.info()
+    else:
+        # Check for mistakes in the arguments first
+        if not util.arguments_valid(argv):
+            sys.exit(2)
 
-    try:
-        opts, args = getopt.getopt(argv, "hvc:s:", ["help", "version",
-                                                    "config=", "scripts"])
+        if argv.count("-c") > 1 or
+           util.fragment_count_list(argv, "--config=") > 1 or
+           argv.count("-s") > 1 or
+           util.fragment_count_in_list(argv, "--scripts=") > 1 or
+           argv.count("-v") > 1 or
+           argv.count("--verbose") or
+           util.project_name_count_in_list(argv) > 1:
+            info.help() # Not just anybody
+
+        if not locate_project_name(argv):
+            info.help() # You know I need somebody, help
+            sys.exit(2)
+
+        if not locate_config_file(argv):
+            info.help() # !
+            sys.exit(2)
+
+        if not locate_scripts_folder(argv):
+            info.help() # When I was younger, so much younger than today
+            sys.exit(2)
+
+        # Finished validating the passed arguments
+        args["project_name"] = locate_project_name(argv)
+        args["scripts"] = locate_scripts_folder(argv)
+        args["config_file"] = locate_config_file(argv)
+        args["verbose"] = check_verbose(argv)
+
+        # Time to create the directories
+        if not skeleton_creator.create_skeleton(args):
+            sys.exit(1)
+
+        # Now, run the plugin (a.k.a plugins)
+        run_plugins.run_plugins(args["verbose"])
+
+    sys.exit(0)
 
 if __name__ == "__main__":
-    self.main(sys.arg[1:])
+    main(sys.argv[1:])
