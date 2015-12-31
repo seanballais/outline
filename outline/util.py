@@ -55,7 +55,7 @@ def check_verbose(elemList):
 
 def arguments_valid(elemList):
     for listElem in elemList:
-        if not is_argument(listElem):
+        if listElem[0] == "-" and not is_argument(listElem):
             info.arg_error(listElem)
             return False
 

@@ -25,13 +25,13 @@ def main(argv):
         if not util.arguments_valid(argv):
             sys.exit(2)
 
-        if argv.count("-c") > 1 or \
-           util.fragment_count_list(argv, "--config=") > 1 or \
-           argv.count("-s") > 1 or \
-           util.fragment_count_in_list(argv, "--scripts=") > 1 or \
-           argv.count("-v") > 1 or \
-           argv.count("--verbose") or \
-           util.project_name_count_in_list(argv) > 1:
+        if (argv.count("-c") > 1 or
+            argv.count("-s") > 1 or
+            argv.count("-v") > 1 or
+            argv.count("--verbose") or
+            util.fragment_count_in_list(argv, "--config=") > 1 or
+            util.fragment_count_in_list(argv, "--scripts=") > 1 or
+            util.project_name_count_in_list(argv) > 1):
             info.help() # Not just anybody
 
         if not locate_project_name(argv):
