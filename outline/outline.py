@@ -34,22 +34,22 @@ def main(argv):
             util.project_name_count_in_list(argv) > 1):
             info.help() # Not just anybody
 
-        if not locate_project_name(argv):
+        if not util.locate_project_name(argv):
             info.help() # You know I need somebody, help
             sys.exit(2)
 
-        if not locate_config_file(argv):
+        if not util.locate_config_file(argv):
             info.help() # !
             sys.exit(2)
 
-        if not locate_scripts_folder(argv):
+        if not util.locate_scripts_folder(argv):
             info.help() # When I was younger, so much younger than today
             sys.exit(2)
 
         # Finished validating the passed arguments
-        args["project_name"] = locate_project_name(argv)
-        args["scripts"] = locate_scripts_folder(argv)
-        args["config_file"] = locate_config_file(argv)
+        args["project_name"] = util.locate_project_name(argv)
+        args["scripts"] = util.locate_scripts_folder(argv)
+        args["config_file"] = util.locate_config_file(argv)
         args["verbose"] = check_verbose(argv)
 
         # Time to create the directories
