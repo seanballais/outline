@@ -38,9 +38,13 @@ def main(argv):
             info.help() # You know I need somebody, help
             sys.exit(2)
 
+        if not util.locate_config_file_in_args(argv):
+            info.help() # !
+            sys.exit(2)
+
         # Finished validating the passed arguments
         args["project_name"] = util.locate_project_name(argv)
-        args["config_file"] = util.locate_config_file(argv)
+        args["config_file"] = util.locate_config_file_in_args(argv)
         args["verbose"] = util.check_verbose(argv)
 
         # Time to create the directories

@@ -24,7 +24,7 @@ def locate_project_name(elemList):
 
     return False
 
-def locate_config_file(elemList):
+def locate_config_file_in_args(elemList):
     for listElem in elemList:
         if "-c" == listElem:
             index = elemList.index(listElem) + 1
