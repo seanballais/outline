@@ -4,50 +4,48 @@ import sys
 
 import info
 
-def fragment_count_in_list(elemList, elem):
+def fragment_count_in_list(elem_list, elem):
     count = 0
-    for listElem in elemList:
-        if elem in listElem:
+    for list_elem in elem_list:
+        if elem in list_elem:
             count += 1
 
     return count
 
-def project_name_specified(elemList):
-    if not is_argument(elemList[0]):
+def project_name_specified(elem_list):
+    if not is_argument(elem_list[0]):
         return True
 
     return False
 
-def locate_project_name(elemList):
-    if not is_argument(elemList[0]):
-        return elemList[0]
+def locate_project_name(elem_list):
+    if not is_argument(elem_list[0]):
+        return elem_list[0]
 
     return False
 
-def locate_config_file_in_args(elemList):
-    for listElem in elemList:
-        if "-c" == listElem:
-            index = elemList.index(listElem) + 1
-            if not "-" in elemList[index] or not "--" in elemList[index]:
-                return elemList[index]
-        elif "--config" in listElem:
-            optLen = len(longOpt)
-            if len(listElem) > optLen:
-                return listElem[optLen:]
+def locate_config_file_in_args(elem_list):
+    for list_elem in elem_list:
+        if "-c" == list_elem:
+            index = elem_list.index(list_elem) + 1
+            if not "-" in elem_list[index] or not "--" in elem_list[index]:
+                return elem_list[index]
+        elif "--config" in list_elem:
+            return list_elem[9:]
 
     return False
 
-def check_verbose(elemList):
-    for listElem in elemList:
-        if listElem == "-v" or listElem == "--verbose":
+def check_verbose(elem_list):
+    for list_elem in elem_list:
+        if list_elem == "-v" or list_elem == "--verbose":
             return True
 
     return False
 
-def arguments_valid(elemList):
-    for listElem in elemList:
-        if listElem[0] == "-" and not is_argument(listElem):
-            info.arg_error(listElem)
+def arguments_valid(elem_list):
+    for list_elem in elem_list:
+        if list_elem[0] == "-" and not is_argument(list_elem):
+            info.arg_error(list_elem)
             return False
 
     return True

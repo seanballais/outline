@@ -49,9 +49,9 @@ def create_skeleton(args):
 def locate_config_file(config_file, locations):
     for loc in locations:
         if os.path.exists(loc):
-            for currFile in os.listdir(loc):
-                if currFile == config_file + ".otc":
-                    return loc + currFile
+            for curr_file in os.listdir(loc):
+                if curr_file == config_file + ".otc":
+                    return loc + curr_file
 
     return False
 
