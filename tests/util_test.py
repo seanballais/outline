@@ -11,7 +11,7 @@ else:
 import util
 
 class UtilTest(unittest.TestCase):
-    def test_locate_project_name():
+    def test_locate_project_name(self):
         test_list = ["project", "-c"]
         self.assertEqual(util.locate_project_name(test_list), "project")
 
