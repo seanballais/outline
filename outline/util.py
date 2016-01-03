@@ -58,7 +58,8 @@ def is_argument(arg):
         arg == "--help" or
         arg == "--verbose" or
         arg == "--version" or
-        "--config=" in arg):
+        "--config=" in arg or
+        "-" in arg):
         return True
 
     return False
