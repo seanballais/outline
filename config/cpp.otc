@@ -1,0 +1,11 @@
+# C++ Outline config
+# Copyright (C) Sean Francis N. Ballais
+
+bin/
+build/
+docs/
+src/
+tests/
+
+LICENSE.md
+README.md
